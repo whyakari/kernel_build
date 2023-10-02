@@ -15,13 +15,6 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Cache Dependencies
-        uses: actions/cache@v2
-        with:
-          path: |
-            ./android_kernel_moe_ginkgo
-          key: ${{ runner.os }}-kernel-dependencies
-
       - name: Clone Repo Kernel
         uses: whyakari/github-repo-action@v3.1
         with:
