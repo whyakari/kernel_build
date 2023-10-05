@@ -15,13 +15,6 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Cache Dependencies
-        uses: actions/cache@v2
-        with:
-          path: |
-            ./android_kernel_moe_ginkgo
-          key: ${{ runner.os }}-kernel-dependencies
-
       - name: Clone Repo Kernel
         uses: whyakari/github-repo-action@v3.1
         with:
@@ -39,7 +32,7 @@ jobs:
   
       - name: Install Dependencies
         run: |
-         sudo apt-get update && sudo apt-get -y upgrade
+         sudo apt-get update
          sudo apt-get -y --no-install-recommends install python3 python3-pip git make gcc bc bison flex libssl-dev ccache libelf-dev libncurses-dev bc binutils-dev ca-certificates clang cmake curl file flex git libelf-dev libssl-dev lld make ninja-build python3-dev texinfo u-boot-tools xz-utils zlib1g-dev
       
       - name: Pip Install Packages
