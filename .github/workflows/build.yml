@@ -1,4 +1,4 @@
-name: CI Telegram (with KSU)
+name: Build Kernel (with KSU)
 
 on:
   workflow_dispatch
