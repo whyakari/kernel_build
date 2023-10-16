@@ -43,4 +43,4 @@ jobs:
       - name: Compile Kernel Via Bot
         working-directory: ./android_kernel_moe_ginkgo
         run: |
-          python3 ci_test.py -t development # release
+          ./moe # python3 ci_test.py -t development # release
