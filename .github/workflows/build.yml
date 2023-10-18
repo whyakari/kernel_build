@@ -33,7 +33,7 @@ jobs:
           repository: 'scripts'
           access-token: ${{ secrets.TOKEN_GITHUB }}
 
-      - name: Move Build.sh
+      - name: Move CI Build
         working-directory: scripts
         run: |
           cp ci_build.py ../android_kernel_moe_ginkgo
