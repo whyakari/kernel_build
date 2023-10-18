@@ -36,7 +36,7 @@ jobs:
       - name: Move Build.sh
         working-directory: scripts
         run: |
-          cp ci_build.py ../
+          cp ci_build.py ../android_kernel_moe_ginkgo
 
       - name: Github set Config Email and Name
         working-directory: ./android_kernel_moe_ginkgo
