@@ -43,4 +43,5 @@ jobs:
       - name: Compile Kernel Via Bot
         working-directory: ./liquid_kernel_realme_even
         run: |
+          ./ksu_update.sh -t stable -k y
           ./moe.sh
