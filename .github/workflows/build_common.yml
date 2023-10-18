@@ -24,7 +24,7 @@ jobs:
           repository: 'liquid_kernel_realme_even'
           access-token: ${{ secrets.TOKEN_GITHUB }}
 
-      - name: Github set Config Email and Name
+      - name: GitHub set config Email and Name
         working-directory: ./liquid_kernel_realme_even
         run: |
           git config --global user.email "akariondev@gmail.com"
@@ -35,7 +35,7 @@ jobs:
          sudo apt-get update
          sudo apt-get -y --no-install-recommends install python3 python3-pip git make gcc bc bison flex libssl-dev ccache libelf-dev libncurses-dev bc binutils-dev ca-certificates clang cmake curl file flex git libelf-dev libssl-dev lld make ninja-build python3-dev texinfo u-boot-tools xz-utils zlib1g-dev
 
-      - name: Compile Kernel Via Bot
+      - name: Compile Kernel CI
         working-directory: ./liquid_kernel_realme_even
         run: |
           ./ksu_update.sh -t stable -k y
