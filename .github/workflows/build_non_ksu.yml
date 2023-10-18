@@ -24,6 +24,20 @@ jobs:
           repository: 'android_kernel_moe_ginkgo'
           access-token: ${{ secrets.TOKEN_GITHUB }}
 
+      - name: Clone Repo Scripts
+        uses: whyakari/github-repo-action@v3.1
+        with:
+          depth: 1
+          branch: 'main'
+          owner: 'whyakari'
+          repository: 'scripts'
+          access-token: ${{ secrets.TOKEN_GITHUB }}
+
+      - name: Move CI Build
+        working-directory: scripts
+        run: |
+          cp ci_build.py ../android_kernel_moe_ginkgo
+
       - name: Github set Config Email and Name
         working-directory: ./android_kernel_moe_ginkgo
         run: |
