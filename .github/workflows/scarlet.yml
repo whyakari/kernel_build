@@ -38,5 +38,5 @@ jobs:
       - name: Compile Kernel CI
         working-directory: ./android_kernel_xiaomi_scarlet
         run: |
-          ./regen.sh
+          ./regen.sh -p 2
           ./kramel.sh --newcam --clang
