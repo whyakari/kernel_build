@@ -1,4 +1,4 @@
-name: Build Kernel (Ginkgo) (with KSU)
+name: Build Kernel (Ginkgo/Willow) (with KSU)
 
 on:
   workflow_dispatch
