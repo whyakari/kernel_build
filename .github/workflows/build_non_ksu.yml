@@ -54,7 +54,7 @@ jobs:
         run: |
           pip install Pyrogram TgCrypto
 
-      - name: Compile Kernel Via Bot
+      - name: Compile Kernel CI
         working-directory: ./android_kernel_xiaomi_ginkgo
         run: |
           python3 ci_build.py -t development # release
