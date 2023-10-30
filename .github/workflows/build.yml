@@ -86,6 +86,7 @@ jobs:
       - name: CI Commit build_counter.txt to Repo Scripts
         working-directory: ./android_kernel_xiaomi_ginkgo
         run: |
+          git remote add origin https://github.com/whyakari/scripts
           git config --global user.email "akariondev@gmail.com"
           git config --global user.name "Akari"
           git add build_counter.txt
