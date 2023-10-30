@@ -91,5 +91,5 @@ jobs:
       - name: Commit Update build_counter.txt to Repo Scripts
         working-directory: ./scripts
           git add build_counter.txt
-          git commit -s -m "update build counter"
+          git commit -m "update build counter"
           git push origin main --force
