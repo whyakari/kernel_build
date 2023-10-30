@@ -90,4 +90,5 @@ jobs:
           git add build_counter.txt
           git commit -s -m "update scripts"
           git remote set-url --add --push origin https://github.com/whyakari/scripts.git
-          git push scripts_ main --force
+          git pull --rebase origin scripts_
+          git push -u origin scripts_
