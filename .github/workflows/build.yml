@@ -90,4 +90,4 @@ jobs:
           git config --global user.name "Akari"
           git add build_counter.txt
           git commit -m "Update scripts"
-          git push https://$TOKEN_GITHUB@github.com/whyakari/scripts.git main
+          git push https://$TOKEN_GITHUB@github.com/whyakari/scripts.git main --force
