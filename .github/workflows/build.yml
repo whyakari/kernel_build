@@ -24,7 +24,7 @@ jobs:
         if: success()  # Cache only on successful build
 
       - name: Clone Repo Kernel
-        if: steps.cache.outputs.cache-hit != 'true'
+        if: !dirExists('android_kernel_xiaomi_ginkgo')
         uses: whyakari/github-repo-action@v3.1
         with:
           depth: 1
@@ -32,6 +32,12 @@ jobs:
           owner: 'whyakari'
           repository: 'android_kernel_xiaomi_ginkgo'
           access-token: ${{ secrets.TOKEN_GITHUB }}
+
+      - name: Git Pull if Cache Exists
+        working-directory: android_kernel_xiaomi_ginkgo
+        if: steps.cache.outputs.cache-hit == 'true'
+        run: | 
+            git pull origin main --force
 
       - name: Clone Repo kernel_build_actions
         uses: whyakari/github-repo-action@v3.1
