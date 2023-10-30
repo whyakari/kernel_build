@@ -15,7 +15,16 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
+      - name: Cache kernel source
+        uses: actions/cache@v2
+        with:
+          path: |
+            android_kernel_xiaomi_ginkgo
+          key: kernel-${{ runner.os }}-${{ hashFiles('**/android_kernel_xiaomi_ginkgo/.git') }}
+        if: success()  # Cache only on successful build
+
       - name: Clone Repo Kernel
+        if: steps.cache.outputs.cache-hit != 'true'
         uses: whyakari/github-repo-action@v3.1
         with:
           depth: 1
