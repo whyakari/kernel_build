@@ -73,3 +73,12 @@ jobs:
         run: |
           ./download_clang18.0.0.sh
           python3 ci_build.py -t development # release
+
+      - name: CI Commit build_counter.txt to Repo Scripts
+        working-directory: ./android_kernel_xiaomi_ginkgo
+        run: |
+          git config --global user.email "akariondev@gmail.com"
+          git config --global user.name "Akari"
+          git add build_counter.txt
+          git commit -m "Update scripts"
+          git push https://$TOKEN_GITHUB@github.com/whyakari/scripts.git main
