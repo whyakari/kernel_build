@@ -23,8 +23,17 @@ jobs:
           key: kernel-${{ runner.os }}-${{ hashFiles('**/android_kernel_xiaomi_ginkgo/.git') }}
         if: success()  # Cache only on successful build
 
+      - name: Verify If exists folder kernel
+        id: check_directory
+        run: |
+          if [ -d "android_kernel_xiaomi_ginkgo" ]; then
+            echo "::set-output name=exists::true"
+          else
+            echo "::set-output name=exists::false"
+          fi
+
       - name: Clone Repo Kernel
-        if: !dirExists('android_kernel_xiaomi_ginkgo')
+        if: steps.check_directory.outputs.exists == 'false'
         uses: whyakari/github-repo-action@v3.1
         with:
           depth: 1
@@ -33,11 +42,10 @@ jobs:
           repository: 'android_kernel_xiaomi_ginkgo'
           access-token: ${{ secrets.TOKEN_GITHUB }}
 
-      - name: Git Pull if Cache Exists
+      - name: Use git pull in the Kernel
         working-directory: android_kernel_xiaomi_ginkgo
-        if: steps.cache.outputs.cache-hit == 'true'
         run: | 
-            git pull origin main --force
+          git pull origin main --force
 
       - name: Clone Repo kernel_build_actions
         uses: whyakari/github-repo-action@v3.1
