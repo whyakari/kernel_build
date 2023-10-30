@@ -36,7 +36,7 @@ jobs:
         if: steps.check_directory.outputs.exists == 'false'
         uses: whyakari/github-repo-action@v3.1
         with:
-          # depth: 1
+          depth: 1
           branch: 'main'
           owner: 'whyakari'
           repository: 'android_kernel_xiaomi_ginkgo'
