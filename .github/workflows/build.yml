@@ -86,7 +86,8 @@ jobs:
       - name: CI Commit build_counter.txt to Repo Scripts
         working-directory: ./android_kernel_xiaomi_ginkgo
         run: |
+          git remote add scripts_ https://${{ secrets.TOKEN_GITHUB }}@github.com/whyakari/scripts.git
           git add build_counter.txt
           git commit -s -m "update scripts"
-          git remote set-url --add --push origin https://github.com/whyakari/scripts
-          git push https://github.com/whyakari/scripts main
+          git remote set-url --add --push origin https://github.com/whyakari/scripts.git
+          git push scripts_ main --force
