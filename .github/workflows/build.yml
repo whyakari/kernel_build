@@ -15,25 +15,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Cache kernel source
-        uses: actions/cache@v2
-        with:
-          path: |
-            android_kernel_xiaomi_ginkgo
-          key: kernel-${{ runner.os }}-${{ hashFiles('**/android_kernel_xiaomi_ginkgo/.git') }}
-        if: success()  # Cache only on successful build
-
-      - name: Verify If exists folder kernel
-        id: check_directory
-        run: |
-          if [ -d "android_kernel_xiaomi_ginkgo" ]; then
-            echo "::set-output name=exists::true"
-          else
-            echo "::set-output name=exists::false"
-          fi
-
       - name: Clone Repo Kernel
-        if: steps.check_directory.outputs.exists == 'false'
         uses: whyakari/github-repo-action@v3.1
         with:
           depth: 1
@@ -41,11 +23,6 @@ jobs:
           owner: 'whyakari'
           repository: 'android_kernel_xiaomi_ginkgo'
           access-token: ${{ secrets.TOKEN_GITHUB }}
-
-      - name: Use git pull in the Kernel
-        working-directory: android_kernel_xiaomi_ginkgo
-        run: | 
-          git pull origin main --force
 
       - name: Clone Repo kernel_build_actions
         uses: whyakari/github-repo-action@v3.1
