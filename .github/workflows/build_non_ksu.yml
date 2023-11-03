@@ -72,3 +72,15 @@ jobs:
         run: |
           ./download_clang18.0.0.sh
           python3 ci_build.py -t development # release
+
+      - name: Move CI build_counter.txt updated
+        working-directory: ./android_kernel_xiaomi_ginkgo
+        run: |
+          cp build_counter.txt ../scripts
+
+      - name: Commit Update build_counter.txt to Repo Scripts
+        working-directory: ./scripts
+        run: |
+          git add build_counter.txt
+          git commit -m "update build counter"
+          git push origin main --force
