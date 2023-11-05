@@ -1,4 +1,4 @@
-name: Build Kernel (Ginkgo/Willow) (non-ksu)
+name: Build Kernel MIUI (NON-KSU)
 
 on:
   workflow_dispatch
