@@ -81,6 +81,7 @@ jobs:
       - name: Commit Update build_counter.txt to Repo Scripts
         working-directory: ./scripts
         run: |
+          # git switch non-ksu
           git add build_counter.txt
           git commit -m "update build counter"
           git push origin non-ksu --force
