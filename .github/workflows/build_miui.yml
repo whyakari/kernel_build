@@ -70,9 +70,8 @@ jobs:
       - name: Compile Kernel CI
         working-directory: ./android_kernel_xiaomi_ginkgo_test
         run: |
-          ./download_clang18.0.0.sh
-          chmod +x moe.sh
-          python3 ci_build.py -t development # release
+          chmod +x build-miui.sh
+          ./build-miui.sh
 
       - name: Move CI build_counter.txt updated
         working-directory: ./android_kernel_xiaomi_ginkgo_test
