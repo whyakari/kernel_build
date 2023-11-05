@@ -28,7 +28,6 @@ jobs:
         uses: whyakari/github-repo-action@v3.1
         with:
           owner: 'whyakari'
-          branch: "non-ksu"
           repository: 'kernel_build_actions'
           access-token: ${{ secrets.TOKEN_GITHUB }}
 
