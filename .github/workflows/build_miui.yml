@@ -19,9 +19,9 @@ jobs:
         uses: whyakari/github-repo-action@v3.1
         with:
           depth: 1
-          branch: 'non-ksu'
+          branch: 'main'
           owner: 'whyakari'
-          repository: 'android_kernel_xiaomi_ginkgo'
+          repository: 'android_kernel_xiaomi_ginkgo_test'
           access-token: ${{ secrets.TOKEN_GITHUB }}
 
       - name: Clone Repo kernel_build_actions
@@ -35,7 +35,7 @@ jobs:
         working-directory: kernel_build_actions
         run: |
           chmod +x download_clang18.0.0.sh
-          cp download_clang18.0.0.sh ../android_kernel_xiaomi_ginkgo
+          cp download_clang18.0.0.sh ../android_kernel_xiaomi_ginkgo_test
 
       - name: Clone Repo Scripts
         uses: whyakari/github-repo-action@v3.1
@@ -49,10 +49,10 @@ jobs:
       - name: Move CI Build
         working-directory: scripts
         run: |
-          cp ci_build.py ../android_kernel_xiaomi_ginkgo
+          cp ci_build.py ../android_kernel_xiaomi_ginkgo_test
 
       - name: Github set Config Email and Name
-        working-directory: ./android_kernel_xiaomi_ginkgo
+        working-directory: ./android_kernel_xiaomi_ginkgo_test
         run: |
           git config --global user.email "akariondev@gmail.com"
           git config --global user.name "ginkgo"
@@ -63,25 +63,25 @@ jobs:
          sudo apt-get -y --no-install-recommends install python3 python3-pip git make gcc bc bison flex libssl-dev ccache libelf-dev libncurses-dev bc binutils-dev ca-certificates clang cmake curl file flex git libelf-dev libssl-dev lld make ninja-build python3-dev texinfo u-boot-tools xz-utils zlib1g-dev
       
       - name: Pip Install Packages
-        working-directory: ./android_kernel_xiaomi_ginkgo
+        working-directory: ./android_kernel_xiaomi_ginkgo_test
         run: |
           pip install Pyrogram TgCrypto
 
       - name: Compile Kernel CI
-        working-directory: ./android_kernel_xiaomi_ginkgo
+        working-directory: ./android_kernel_xiaomi_ginkgo_test
         run: |
           ./download_clang18.0.0.sh
           python3 ci_build.py -t development # release
 
       - name: Move CI build_counter.txt updated
-        working-directory: ./android_kernel_xiaomi_ginkgo
+        working-directory: ./android_kernel_xiaomi_ginkgo_test
         run: |
           cp build_counter.txt ../scripts
 
       - name: Commit Update build_counter.txt to Repo Scripts
         working-directory: ./scripts
         run: |
-          # git switch non-ksu
+          git switch non-ksu
           git add build_counter.txt
           git commit -m "update build counter"
           git push origin non-ksu --force
