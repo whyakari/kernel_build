@@ -50,7 +50,7 @@ jobs:
         working-directory: scripts
         run: |
           chmod +x ksu_update.sh
-          cp build_counter.txt ksu_update.sh ci_build.py ../android_kernel_xiaomi_ginkgo
+          ksu_update.sh ci_build.py ../android_kernel_xiaomi_ginkgo
 
       - name: Github set Config Email and Name
         working-directory: ./android_kernel_xiaomi_ginkgo
@@ -74,12 +74,12 @@ jobs:
           ./download_clang18.0.0.sh
           python3 ci_build.py -t development # release
 
-      - name: Move CI build_counter.txt updated
+      - name: Move CI Build count
         working-directory: ./android_kernel_xiaomi_ginkgo
         run: |
           cp build_counter.txt ../scripts
 
-      - name: Commit Update build_counter.txt to Repo Scripts
+      - name: Commit Update
         working-directory: ./scripts
         run: |
           git add build_counter.txt
