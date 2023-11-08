@@ -54,7 +54,8 @@ jobs:
       - name: Move CI Build
         working-directory: scripts
         run: |
-          cp build_counter.txt ci_build.py ../android_kernel_xiaomi_ginkgo
+          chmod +x ksu_update.sh
+          cp ksu_update.sh build_counter.txt ci_build.py ../android_kernel_xiaomi_ginkgo
 
       - name: Github set Config Email and Name
         working-directory: ./android_kernel_xiaomi_ginkgo
