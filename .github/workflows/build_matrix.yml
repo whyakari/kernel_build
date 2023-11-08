@@ -74,6 +74,7 @@ jobs:
           pip install Pyrogram TgCrypto
 
       - name: Compile Kernel CI
+        if: success()
         working-directory: ./android_kernel_xiaomi_ginkgo
         run: |
           ./download_clang18.0.0.sh
