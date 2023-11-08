@@ -24,7 +24,7 @@ jobs:
         uses: whyakari/github-repo-action@v3.1
         with:
           depth: 1
-          branch: ${{ matrix.build_type == 'KSU' ? 'main' : 'non-ksu' }}
+          branch: ${{ matrix.build_type == 'KSU' && 'main' || matrix.build_type == 'NO-KSU' && 'non-ksu' }}
           owner: 'whyakari'
           repository: 'android_kernel_xiaomi_ginkgo'
           access-token: ${{ secrets.TOKEN_GITHUB }}
@@ -46,7 +46,7 @@ jobs:
         uses: whyakari/github-repo-action@v3.1
         with:
           depth: 1
-          branch: ${{ matrix.build_type == 'KSU' ? 'main' : 'non-ksu' }}
+          branch: ${{ matrix.build_type == 'KSU' && 'main' || matrix.build_type == 'NO-KSU' && 'non-ksu' }}
           owner: 'whyakari'
           repository: 'scripts'
           access-token: ${{ secrets.TOKEN_GITHUB }}
@@ -88,4 +88,4 @@ jobs:
         run: |
           git add build_counter.txt
           git commit -m "update build counter"
-          git push origin ${{ matrix.build_type == 'KSU' ? 'main' : 'non-ksu' }} --force
+          git push origin ${{ matrix.build_type == 'KSU' && 'main' || matrix.build_type == 'NO-KSU' && 'non-ksu' }} --force
