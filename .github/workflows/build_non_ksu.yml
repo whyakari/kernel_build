@@ -1,4 +1,4 @@
-name: Build Kernel (NON-KSU)
+name: Build Kernel (NO-KSU)
 
 on:
   workflow_dispatch
