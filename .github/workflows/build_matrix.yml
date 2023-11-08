@@ -45,7 +45,7 @@ jobs:
         uses: whyakari/github-repo-action@v3.1
         with:
           depth: 1
-          branch: ${{ matrix.kernel_type == 'KSU' ? 'main' : 'non-ksu' }}
+          branch: ${{ matrix.kernel_type == 'KSU' ? 'main'; 'non-ksu' }}
           owner: 'whyakari'
           repository: 'scripts'
           access-token: ${{ secrets.TOKEN_GITHUB }}
