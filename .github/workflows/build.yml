@@ -35,7 +35,7 @@ jobs:
         working-directory: kernel_build_actions
         run: |
           chmod +x download_clang18.0.0.sh
-          download_clang18.0.0.sh ../android_kernel_xiaomi_ginkgo
+          cp download_clang18.0.0.sh ../android_kernel_xiaomi_ginkgo
 
       - name: Clone Repo Scripts
         uses: whyakari/github-repo-action@v3.1
