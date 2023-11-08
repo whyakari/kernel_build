@@ -35,7 +35,7 @@ jobs:
         working-directory: kernel_build_actions
         run: |
           chmod +x download_clang18.0.0.sh
-          cp download_clang18.0.0.sh ../android_kernel_xiaomi_ginkgo
+          download_clang18.0.0.sh ../android_kernel_xiaomi_ginkgo
 
       - name: Clone Repo Scripts
         uses: whyakari/github-repo-action@v3.1
@@ -50,7 +50,7 @@ jobs:
         working-directory: scripts
         run: |
           chmod +x ksu_update.sh
-          ksu_update.sh ci_build.py ../android_kernel_xiaomi_ginkgo
+          cp build_counter.txt ksu_update.sh ci_build.py ../android_kernel_xiaomi_ginkgo
 
       - name: Github set Config Email and Name
         working-directory: ./android_kernel_xiaomi_ginkgo
