@@ -73,7 +73,7 @@ jobs:
           ./download_clang18.0.0.sh
           python3 ci_build.py -t development # release
 
-      - name: Move CI build_counter.txt Updated
+      - name: Move CI Build Count
         working-directory: ./android_kernel_xiaomi_ginkgo
         run: |
           cp build_counter.txt ../scripts
