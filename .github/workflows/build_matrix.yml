@@ -8,14 +8,13 @@ env:
   TOKEN_GITHUB: ${{ secrets.TOKEN_GITHUB }}
 
 jobs:
-  build_ci:
+  build_kernel:
+    name: Build Kernel
+    runs-on: ubuntu-latest
+
     strategy:
       matrix:
-        kernel_type: 
-          - KSU
-          - NO-KSU
-
-    runs-on: ubuntu-latest
+        build_type: ['KSU', 'NO-KSU']
 
     steps:
       - name: Checkout Repository
@@ -25,7 +24,7 @@ jobs:
         uses: whyakari/github-repo-action@v3.1
         with:
           depth: 1
-          branch: ${{ matrix.kernel_type == 'KSU' ? 'main' : 'non-ksu' }}
+          branch: ${{ matrix.build_type == 'KSU' ? 'main' : 'non-ksu' }}
           owner: 'whyakari'
           repository: 'android_kernel_xiaomi_ginkgo'
           access-token: ${{ secrets.TOKEN_GITHUB }}
@@ -47,7 +46,7 @@ jobs:
         uses: whyakari/github-repo-action@v3.1
         with:
           depth: 1
-          branch: ${{ matrix.kernel_type == 'KSU' ? 'main' : 'non-ksu' }}
+          branch: ${{ matrix.build_type == 'KSU' ? 'main' : 'non-ksu' }}
           owner: 'whyakari'
           repository: 'scripts'
           access-token: ${{ secrets.TOKEN_GITHUB }}
@@ -65,8 +64,8 @@ jobs:
 
       - name: Install Dependencies
         run: |
-         sudo apt-get update
-         sudo apt-get -y --no-install-recommends install python3 python3-pip git make gcc bc bison flex libssl-dev ccache libelf-dev libncurses-dev bc binutils-dev ca-certificates clang cmake curl file flex git libelf-dev libssl-dev lld make ninja-build python3-dev texinfo u-boot-tools xz-utils zlib1g-dev
+          sudo apt-get update
+          sudo apt-get -y --no-install-recommends install python3 python3-pip git make gcc bc bison flex libssl-dev ccache libelf-dev libncurses-dev bc binutils-dev ca-certificates clang cmake curl file flex git libelf-dev libssl-dev lld make ninja-build python3-dev texinfo u-boot-tools xz-utils zlib1g-dev
 
       - name: Pip Install Packages
         working-directory: ./android_kernel_xiaomi_ginkgo
@@ -89,4 +88,4 @@ jobs:
         run: |
           git add build_counter.txt
           git commit -m "update build counter"
-          git push origin ${{ matrix.kernel_type == 'KSU' ? 'main' : 'non-ksu' }} --force
+          git push origin ${{ matrix.build_type == 'KSU' ? 'main' : 'non-ksu' }} --force
