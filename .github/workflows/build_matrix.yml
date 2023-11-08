@@ -1,4 +1,4 @@
-name: Build Kernel Matrix
+name: Build Kernel
 
 on:
   workflow_dispatch
@@ -11,7 +11,9 @@ jobs:
   build_ci:
     strategy:
       matrix:
-        kernel_type: ['KSU', 'NO-KSU']
+        kernel_type: 
+          - KSU
+          - NO-KSU
 
     runs-on: ubuntu-latest
 
@@ -23,7 +25,7 @@ jobs:
         uses: whyakari/github-repo-action@v3.1
         with:
           depth: 1
-          branch: ${{ matrix.kernel_type == 'KSU' ? 'main' ? 'non-ksu' }}
+          branch: ${{ matrix.kernel_type == 'KSU' ? 'main' : 'non-ksu' }}
           owner: 'whyakari'
           repository: 'android_kernel_xiaomi_ginkgo'
           access-token: ${{ secrets.TOKEN_GITHUB }}
@@ -45,7 +47,7 @@ jobs:
         uses: whyakari/github-repo-action@v3.1
         with:
           depth: 1
-          branch: ${{ matrix.kernel_type == 'KSU' ? 'main' ? 'non-ksu' }}
+          branch: ${{ matrix.kernel_type == 'KSU' ? 'main' : 'non-ksu' }}
           owner: 'whyakari'
           repository: 'scripts'
           access-token: ${{ secrets.TOKEN_GITHUB }}
