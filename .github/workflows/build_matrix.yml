@@ -73,19 +73,7 @@ jobs:
         run: |
           pip install Pyrogram TgCrypto
 
-      - name: Check Compilation Result
-        id: check_compilation
-        run: |
-          if python3 ci_build.py -t development then
-            echo "Compilation successful"
-            echo "::set-output name=success::true"
-          else
-            echo "Compilation failed"
-            echo "::set-output name=success::false"
-          fi
-
       - name: Compile Kernel CI
-        if: steps.check_compilation.outputs.success == 'true'
         working-directory: ./android_kernel_xiaomi_ginkgo
         run: |
           ./download_clang18.0.0.sh
@@ -97,7 +85,6 @@ jobs:
           cp build_counter.txt ../scripts
 
       - name: Commit Update
-        if: steps.check_compilation.outputs.success == 'true'
         working-directory: ./scripts
         run: |
           git add build_counter.txt
