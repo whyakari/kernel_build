@@ -76,7 +76,7 @@ jobs:
       - name: Check Compilation Result
         id: check_compilation
         run: |
-          if python3 ci_build.py -t development # release; then
+          if python3 ci_build.py -t development then
             echo "Compilation successful"
             echo "::set-output name=success::true"
           else
