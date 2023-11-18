@@ -24,7 +24,7 @@ if [ $? -ne 0 ]; then
 fi
 
 mkdir -p "$destination_dir"
-tar -xzf "$output_file" -C "$destination_dir"
+tar -xf "$output_file" -C "$destination_dir"
 
 if [ $? -eq 0 ]; then
   echo "Archive extracted with success in '$destination_dir'."
