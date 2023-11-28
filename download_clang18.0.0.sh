@@ -4,9 +4,9 @@
 #   By Akari Nyan - © 2023
 # ----------------------------- 
 
-url="https://github.com/ZyCromerZ/Clang/releases/download/18.0.0-20231124-release/Clang-18.0.0-20231124.tar.gz"
+url="https://github.com/ZyCromerZ/Clang/releases/download/18.0.0-20231128-release/Clang-18.0.0-20231128.tar.gz"
 
-output_file="Clang-18.0.0-20231124.tar.gz"
+output_file="Clang-18.0.0-20231128.tar.gz"
 destination_dir="$HOME/tc/clang-18.0.0"
 
 if ! command -v curl &>/dev/null; then
