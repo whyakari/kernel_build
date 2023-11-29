@@ -1,0 +1,45 @@
+name: Cache GCC
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Setup GCC and GCC_32
+      run: |
+        TC_DIR="$HOME/tc/clang-18.0.0"
+        GCC_64_DIR="$HOME/tc/aarch64-linux-android-14.0"
+        GCC_32_DIR="$HOME/tc/arm-linux-androideabi-14.0"
+
+        if ! [ -d "${GCC_64_DIR}" ]; then
+            echo "gcc not found! Cloning to ${GCC_64_DIR}..."
+            git clone --depth=1 -b 14 https://github.com/ZyCromerZ/aarch64-zyc-linux-gnu ${GCC_64_DIR}
+        fi
+
+        if ! [ -d "${GCC_32_DIR}" ]; then
+            echo "gcc_32 not found! Cloning to ${GCC_32_DIR}..."
+            git clone --depth=1 -b 14 https://github.com/ZyCromerZ/arm-zyc-linux-gnueabi ${GCC_32_DIR}
+        fi
+
+    - name: Cache GCC and GCC_32
+      uses: actions/cache@v2
+      with:
+        path: |
+          $HOME/tc/clang-18.0.0
+          $HOME/tc/aarch64-linux-android-14.0
+          $HOME/tc/arm-linux-androideabi-14.0
+        key: gcc-cache-${{ runner.os }}-${{ hashFiles('**/*.yaml') }}
+        restore-keys: |
+          gcc-cache-${{ runner.os }}-
+
+    - name: Display cached directories
+      run: |
+        ls -R $HOME/tc/
