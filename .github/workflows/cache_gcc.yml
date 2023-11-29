@@ -37,7 +37,7 @@ jobs:
       uses: actions/cache/save@v3
       with:
         path: |
-          ./$HOME/tc
+          $HOME/tc
         key: ${{ runner.os }}-tc
 
     - name: Display cached directories
