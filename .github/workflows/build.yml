@@ -78,7 +78,7 @@ jobs:
       - name: Compile Kernel CI
         working-directory: ./android_kernel_xiaomi_ginkgo
         run: |
-          ./download_clang18.0.0.sh
+          # ./download_clang18.0.0.sh
           python3 ci_build.py -t development # release
 
       - name: Move CI Build count
