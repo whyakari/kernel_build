@@ -36,8 +36,7 @@ jobs:
       id: tc-cache
       uses: actions/cache/save@v3
       with:
-        path: |
-          $HOME/tc
+        path: /home/runner/tc
         key: ${{ runner.os }}-tc
 
     - name: Display cached directories
