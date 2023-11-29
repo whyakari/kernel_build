@@ -1,4 +1,4 @@
-name: Cache (GCC, GCC32, CLANG)
+name: Cache (GCC, GCC32, Clang)
 
 on:
   workflow_dispatch
@@ -33,11 +33,12 @@ jobs:
         fi
 
     - name: Cache Create
+      id: tc-cache
       uses: actions/cache@v3
       with:
         path: |
-          $HOME/tc
-        key: gcc-cache-${{ runner.os }}-
+          ./$HOME/tc
+        key: ${{ runner.os }}-tc
 
     - name: Display cached directories
       run: |
