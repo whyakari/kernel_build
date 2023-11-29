@@ -1,4 +1,4 @@
-name: Cache GCC
+name: Cache (GCC, GCC32, CLANG)
 
 on:
   workflow_dispatch
@@ -11,7 +11,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Setup GCC / GCC_32 / Clang
+    - name: Setup GCC / GCC32 / Clang18
       run: |
         TC_DIR="$HOME/tc/clang-18.0.0"
         GCC_64_DIR="$HOME/tc/aarch64-linux-android-14.0"
@@ -32,8 +32,8 @@ jobs:
             git clone --depth=1 -b 14 https://github.com/ZyCromerZ/arm-zyc-linux-gnueabi ${GCC_32_DIR}
         fi
 
-    - name: Cache GCC and GCC_32
-      uses: actions/cache@v2
+    - name: Cache Create
+      uses: actions/cache@v3
       with:
         path: |
           $HOME/tc
