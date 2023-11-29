@@ -31,6 +31,13 @@ jobs:
           repository: 'kernel_build_actions'
           access-token: ${{ secrets.TOKEN_GITHUB }}
 
+      - name: Restore Cache
+        uses: actions/cache@v3
+        with:
+          path: /home/runner/tc
+          key: ${{ runner.os }}-tc
+        id: cache 
+
       - name: Move Script Download Clang-18.0.0
         working-directory: kernel_build_actions
         run: |
