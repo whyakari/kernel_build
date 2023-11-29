@@ -34,7 +34,7 @@ jobs:
 
     - name: Cache Create
       id: tc-cache
-      uses: actions/cache@v3
+      uses: actions/cache/save@v3
       with:
         path: |
           ./$HOME/tc
