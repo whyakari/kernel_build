@@ -11,7 +11,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Setup GCC and GCC_32
+    - name: Setup GCC / GCC_32 / Clang
       run: |
         TC_DIR="$HOME/tc/clang-18.0.0"
         GCC_64_DIR="$HOME/tc/aarch64-linux-android-14.0"
@@ -36,13 +36,13 @@ jobs:
         fi
 
     - name: Cache GCC and GCC_32
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: |
           $HOME/tc/clang-18.0.0
           $HOME/tc/aarch64-linux-android-14.0
           $HOME/tc/arm-linux-androideabi-14.0
-        key: gcc-cache-${{ runner.os }}-${{ hashFiles('**/*.yaml') }}
+        key: gcc-cache-${{ runner.os }}-
         restore-keys: |
           gcc-cache-${{ runner.os }}-
 
