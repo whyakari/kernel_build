@@ -19,10 +19,7 @@ jobs:
 
         if ! [ -d "${TC_DIR}" ]; then
             echo "Clang not found! Cloning to ${TC_DIR}..."
-            if ! git clone --depth=1 https://gitlab.com/moehacker/clang-r498229b ${TC_DIR}; then
-                echo "Cloning failed! Aborting..."
-                exit 1
-            fi
+            git clone --depth=1 https://gitlab.com/moehacker/clang-r498229b ${TC_DIR}
         fi
 
         if ! [ -d "${GCC_64_DIR}" ]; then
@@ -36,15 +33,11 @@ jobs:
         fi
 
     - name: Cache GCC and GCC_32
-      uses: actions/cache@v3
+      uses: actions/cache@v2
       with:
         path: |
-          $HOME/tc/clang-18.0.0
-          $HOME/tc/aarch64-linux-android-14.0
-          $HOME/tc/arm-linux-androideabi-14.0
+          $HOME/tc
         key: gcc-cache-${{ runner.os }}-
-        restore-keys: |
-          gcc-cache-${{ runner.os }}-
 
     - name: Display cached directories
       run: |
