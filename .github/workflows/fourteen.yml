@@ -1,0 +1,93 @@
+name: Build Kernel (KSU)
+
+on:
+  workflow_dispatch
+
+env:
+  ZIPNAME: MoeKernel-$(date '+%Y%m%d-%H%M').zip
+  TOKEN_GITHUB: ${{ secrets.TOKEN_GITHUB }}
+
+jobs:
+  build_ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Clone Repo Kernel
+        uses: whyakari/github-repo-action@v3.1
+        with:
+          depth: 1
+          branch: 'fourteen'
+          owner: 'whyakari'
+          repository: 'android_kernel_xiaomi_ginkgo'
+          access-token: ${{ secrets.TOKEN_GITHUB }}
+
+      - name: Clone Repo kernel_build_actions
+        uses: whyakari/github-repo-action@v3.1
+        with:
+          owner: 'whyakari'
+          repository: 'kernel_build_actions'
+          access-token: ${{ secrets.TOKEN_GITHUB }}
+
+      - name: Restore Cache
+        uses: actions/cache@v3
+        with:
+          path: /home/runner/tc
+          key: ${{ runner.os }}-tc
+        id: tc-cache 
+
+      - name: Move Script Download Clang-18.0.0
+        working-directory: kernel_build_actions
+        run: |
+          chmod +x download_clang18.0.0.sh
+          cp download_clang18.0.0.sh ../android_kernel_xiaomi_ginkgo
+
+      - name: Clone Repo Scripts
+        uses: whyakari/github-repo-action@v3.1
+        with:
+          depth: 1
+          branch: 'main'
+          owner: 'whyakari'
+          repository: 'scripts'
+          access-token: ${{ secrets.TOKEN_GITHUB }}
+
+      - name: Move CI Build
+        working-directory: scripts
+        run: |
+          chmod +x ksu_update.sh
+          cp build_counter.txt ksu_update.sh ci_build.py ../android_kernel_xiaomi_ginkgo
+
+      - name: Github set Config Email and Name
+        working-directory: ./android_kernel_xiaomi_ginkgo
+        run: |
+          git config --global user.email "akariondev@gmail.com"
+          git config --global user.name "ginkgo"
+  
+      - name: Install Dependencies
+        run: |
+         sudo apt-get update
+         sudo apt-get -y --no-install-recommends install python3 python3-pip git make gcc bc bison flex libssl-dev ccache libelf-dev libncurses-dev bc binutils-dev ca-certificates clang cmake curl file flex git libelf-dev libssl-dev lld make ninja-build python3-dev texinfo u-boot-tools xz-utils zlib1g-dev
+      
+      - name: Pip Install Packages
+        working-directory: ./android_kernel_xiaomi_ginkgo
+        run: |
+          pip install Pyrogram TgCrypto
+
+      - name: Compile Kernel CI
+        working-directory: ./android_kernel_xiaomi_ginkgo
+        run: |
+          python3 ci_build.py -t development # release
+
+      - name: Move CI Build count
+        working-directory: ./android_kernel_xiaomi_ginkgo
+        run: |
+          cp build_counter.txt ../scripts
+
+      - name: Commit Update
+        working-directory: ./scripts
+        run: |
+          git add build_counter.txt
+          git commit -m "update build counter"
+          git push origin main --force
