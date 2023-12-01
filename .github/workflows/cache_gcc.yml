@@ -11,16 +11,24 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
+    - name: Clone Repo kernel_build_actions
+      uses: whyakari/github-repo-action@v3.1
+      with:
+        owner: 'whyakari'
+        repository: 'kernel_build_actions'
+        access-token: ${{ secrets.TOKEN_GITHUB }}
+
+    - name: Download Clang18.0.0
+      working-directory: ./kernel_build_actions
+      run: |
+        chmod +x download_clang18.0.0.sh
+        ./download_clang18.0.0.sh
+
     - name: Setup GCC / GCC32 / Clang18
       run: |
         TC_DIR="$HOME/tc/clang-18.0.0"
         GCC_64_DIR="$HOME/tc/aarch64-linux-android-14.0"
         GCC_32_DIR="$HOME/tc/arm-linux-androideabi-14.0"
-
-        if ! [ -d "${TC_DIR}" ]; then
-            echo "Clang not found! Cloning to ${TC_DIR}..."
-            git clone --depth=1 https://gitlab.com/moehacker/clang-r498229b ${TC_DIR}
-        fi
 
         if ! [ -d "${GCC_64_DIR}" ]; then
             echo "gcc not found! Cloning to ${GCC_64_DIR}..."
