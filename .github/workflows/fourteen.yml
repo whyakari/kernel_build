@@ -4,7 +4,6 @@ on:
   workflow_dispatch
 
 env:
-  ZIPNAME: MoeKernel-$(date '+%Y%m%d-%H%M').zip
   TOKEN_GITHUB: ${{ secrets.TOKEN_GITHUB }}
 
 jobs:
