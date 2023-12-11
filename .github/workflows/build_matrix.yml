@@ -44,6 +44,13 @@ jobs:
           repository: 'scripts'
           access-token: ${{ secrets.TOKEN_GITHUB }}
 
+      - name: Restore Cache
+        uses: actions/cache@v3
+        with:
+          path: /home/runner/tc
+          key: ${{ runner.os }}-tc
+        id: tc-cache 
+
       - name: Move CI Build
         working-directory: scripts
         run: |
