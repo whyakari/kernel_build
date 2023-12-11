@@ -4,7 +4,6 @@ on:
   workflow_dispatch
 
 env:
-  ZIPNAME: MoeKernel-$(date '+%Y%m%d-%H%M').zip
   TOKEN_GITHUB: ${{ secrets.TOKEN_GITHUB }}
 
 jobs:
@@ -24,7 +23,7 @@ jobs:
         uses: whyakari/github-repo-action@v3.1
         with:
           depth: 1
-          branch: ${{ matrix.build_type == 'KSU' && 'main' || matrix.build_type == 'NO-KSU' && 'non-ksu' }}
+          branch: ${{ matrix.build_type == 'KSU' && 'fourteen' || matrix.build_type == 'NO-KSU' && 'non-ksu' }}
           owner: 'whyakari'
           repository: 'android_kernel_xiaomi_ginkgo'
           access-token: ${{ secrets.TOKEN_GITHUB }}
