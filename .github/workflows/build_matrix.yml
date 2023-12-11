@@ -35,12 +35,6 @@ jobs:
           repository: 'kernel_build_actions'
           access-token: ${{ secrets.TOKEN_GITHUB }}
 
-      - name: Move Script Download Clang-18.0.0
-        working-directory: kernel_build_actions
-        run: |
-          chmod +x download_clang18.0.0.sh
-          cp download_clang18.0.0.sh ../android_kernel_xiaomi_ginkgo
-
       - name: Clone Repo Scripts
         uses: whyakari/github-repo-action@v3.1
         with:
@@ -75,7 +69,6 @@ jobs:
       - name: Compile Kernel CI
         working-directory: ./android_kernel_xiaomi_ginkgo
         run: |
-          ./download_clang18.0.0.sh
           python3 ci_build.py -t development # release
 
       - name: Move CI Build Count
