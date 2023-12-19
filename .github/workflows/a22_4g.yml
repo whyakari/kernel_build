@@ -37,4 +37,5 @@ jobs:
       - name: Compile Kernel CI
         working-directory: ./android_kernel_samsung_a225m_a224g
         run: |
+          chmod +x build_kernel.sh
           ./build_kernel.sh
