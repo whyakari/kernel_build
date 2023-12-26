@@ -41,7 +41,7 @@ jobs:
         working-directory: ./kernel_moe_pixelos
         run: |
           pwd
-          echo "artifactPath=/**/*.zip" >> $GITHUB_ENV
+          echo "artifactPath=/home/runner/work/kernel_build_actions/kernel_build_actions/kernel_moe_pixelos/**/*.zip" >> $GITHUB_ENV
           
       - name: Upload Kernel
         uses: actions/upload-artifact@v3
