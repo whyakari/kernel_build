@@ -45,7 +45,8 @@ jobs:
       - name: Compile Kernel CI
         working-directory: ./kernel_moe_pixelos
         run: |
-          chmod +x build.sh
+          chmod +x build.sh ksu_update.sh
+          ./ksu_update.sh -t stable -k y
           ./build.sh
 
       - name: Artifact Path
