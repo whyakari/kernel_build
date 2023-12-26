@@ -47,3 +47,15 @@ jobs:
         run: |
           chmod +x build.sh
           ./build.sh
+
+      - name: Artifact Path
+        working-directory: ./kernel_moe_pixelos
+        run: |
+          echo "artifactPath=/home/runner/work/kernel_moe_pixelos/**/*.zip" >> $GITHUB_ENV
+          
+      - name: Upload Kernel
+        uses: actions/upload-artifact@v3
+        with:
+          name: artifact-kernel
+          path: ${{ env.artifactPath }}
+          if-no-files-found: error
