@@ -1,4 +1,4 @@
-name: Build Kernel (KSU) Fourteen
+name: Build Test (KSU) Fourteen
 
 on:
   workflow_dispatch
