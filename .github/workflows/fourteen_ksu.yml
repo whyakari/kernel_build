@@ -1,4 +1,4 @@
-name: Build Kernel (KSU) Fourteen
+name: PixelOS Kernel Build (Fourteen/KSU)
 
 on:
   workflow_dispatch
