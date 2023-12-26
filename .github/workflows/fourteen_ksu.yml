@@ -24,6 +24,13 @@ jobs:
           repository: 'kernel_moe_pixelos'
           access-token: ${{ secrets.TOKEN_GITHUB }}
 
+      - name: Restore Cache
+        uses: actions/cache@v3
+        with:
+          path: /home/runner/tc
+          key: ${{ runner.os }}-tc
+        id: tc-cache
+
       - name: Github set Config Email and Name
         working-directory: ./kernel_moe_pixelos
         run: |
