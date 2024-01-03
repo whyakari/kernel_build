@@ -1,0 +1,62 @@
+name: PixelOS Kernel Build (Fourteen/NO-KSU)
+
+on:
+  workflow_dispatch
+
+env:
+  ZIPNAME: MoeKernel-$(date '+%Y%m%d-%H%M').zip
+  TOKEN_GITHUB: ${{ secrets.TOKEN_GITHUB }}
+
+jobs:
+  build_ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Clone Repo Kernel
+        uses: whyakari/github-repo-action@v3.1
+        with:
+          depth: 1
+          branch: 'no-ksu'
+          owner: 'whyakari'
+          repository: 'kernel_moe_pixelos'
+          access-token: ${{ secrets.TOKEN_GITHUB }}
+
+      - name: Restore Cache
+        uses: actions/cache@v3
+        with:
+          path: /home/runner/tc
+          key: ${{ runner.os }}-tc
+        id: tc-cache
+
+      - name: Github set Config Email and Name
+        working-directory: ./kernel_moe_pixelos
+        run: |
+          git config --global user.email "akariondev@gmail.com"
+          git config --global user.name "ginkgo"
+  
+      - name: Install Dependencies
+        run: |
+         sudo apt-get update
+         sudo apt-get -y --no-install-recommends install python3 python3-pip git make gcc bc bison flex libssl-dev ccache libelf-dev libncurses-dev bc binutils-dev ca-certificates clang cmake curl file flex git libelf-dev libssl-dev lld make ninja-build python3-dev texinfo u-boot-tools xz-utils zlib1g-dev
+
+      - name: Compile Kernel CI
+        working-directory: ./kernel_moe_pixelos
+        run: |
+          chmod +x build.sh
+          ./build.sh
+
+      - name: Artifact Path
+        working-directory: ./kernel_moe_pixelos
+        run: |
+          pwd
+          echo "artifactPath=/home/runner/work/kernel_build_actions/kernel_build_actions/kernel_moe_pixelos/**/*.zip" >> $GITHUB_ENV
+
+      - name: Upload Kernel
+        uses: actions/upload-artifact@v3
+        with:
+          name: artifact-kernel
+          path: ${{ env.artifactPath }}
+          if-no-files-found: error
