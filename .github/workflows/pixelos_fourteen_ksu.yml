@@ -5,6 +5,10 @@ on:
 
 env:
   TOKEN_GITHUB: ${{ secrets.TOKEN_GITHUB }}
+  API_ID: ${{ secrets.API_ID }}
+  API_HASH: ${{ secrets.API_HASH }}
+  BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+  CHAT_ID: ${{ secrets.CHAT_ID }}
 
 jobs:
   build_ci:
