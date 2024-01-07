@@ -44,20 +44,22 @@ jobs:
       - name: Pip Install Packages
         working-directory: ./kernel_moe_pixelos
         run: |
-          pip install Pyrogram TgCrypto
+          pip install Pyrogram TgCrypto load_dotenv
 
       - name: Permissions Set
         working-directory: ./kernel_moe_pixelos
         run: |
           chmod +x build.sh ksu_update.sh
-          
+
+      - name: Export Variables to .env
+        run: |
+         echo "CHAT_ID=${{ secrets.CHAT_ID }}" >> .env
+         echo "API_ID=${{ secrets.API_ID }}" >> .env
+         echo "API_HASH=${{ secrets.API_HASH }}" >> .env
+         echo "BOT_TOKEN=${{ secrets.BOT_TOKEN }}" >> .env
+
       - name: Compile Kernel CI
         working-directory: ./kernel_moe_pixelos
-        env:
-          CHAT_ID: ${{ secrets.CHAT_ID }}
-          API_ID: ${{ secrets.API_ID }}
-          API_HASH: ${{ secrets.API_HASH }}
-          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
         run: |
           python3 upload_bot.py -t dev # or release.
           
