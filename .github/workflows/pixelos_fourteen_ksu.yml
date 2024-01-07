@@ -53,10 +53,11 @@ jobs:
           
       - name: Compile Kernel CI
         working-directory: ./kernel_moe_pixelos
+        env:
+          CHAT_ID: ${{ secrets.CHAT_ID }}
+          API_ID: ${{ secrets.API_ID }}
+          API_HASH: ${{ secrets.API_HASH }}
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
         run: |
-          export CHAT_ID=${{ secrets.CHAT_ID }}
-          export API_ID=${{ secrets.API_ID }}
-          export API_HASH=${{ secrets.API_HASH }}
-          export BOT_TOKEN=${{ secrets.BOT_TOKEN }}
           python3 upload_bot.py -t dev # or release.
-  
+          
