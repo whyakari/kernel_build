@@ -50,16 +50,13 @@ jobs:
         working-directory: ./kernel_moe_pixelos
         run: |
           chmod +x build.sh ksu_update.sh
-
-      - name: Set Environment Variables
+          
+      - name: Compile Kernel CI
+        working-directory: ./kernel_moe_pixelos
         run: |
           export CHAT_ID=${{ secrets.CHAT_ID }}
           export API_ID=${{ secrets.API_ID }}
           export API_HASH=${{ secrets.API_HASH }}
           export BOT_TOKEN=${{ secrets.BOT_TOKEN }}
-  
-      - name: Compile Kernel CI
-        working-directory: ./kernel_moe_pixelos
-        run: |
           python3 upload_bot.py -t dev # or release.
   
