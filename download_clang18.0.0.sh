@@ -1,12 +1,16 @@
 #!/bin/bash
 
 # -----------------------------
-#   By Akari Nyan - © 2023
+# script created by
+#     Akari Azusagawa © 2023
 # ----------------------------- 
 
-url="https://github.com/ZyCromerZ/Clang/releases/download/18.0.0-20231128-release/Clang-18.0.0-20231128.tar.gz"
+date_="20240106" # updated clang version.
+version="18.0.0git-$date_-release"
+clang_gz="Clang-18.0.0git-$date_.tar.gz"
+url="https://github.com/ZyCromerZ/Clang/releases/download/$version/$clang_gz"
 
-output_file="Clang-18.0.0-20231128.tar.gz"
+output_file="$clang_gz"
 destination_dir="$HOME/tc/clang-18.0.0"
 
 if ! command -v curl &>/dev/null; then
