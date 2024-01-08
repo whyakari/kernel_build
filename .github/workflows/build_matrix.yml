@@ -1,4 +1,4 @@
-name: Build Kernel Matrix
+name: Build Kernel (Matrix)
 
 on:
   workflow_dispatch
