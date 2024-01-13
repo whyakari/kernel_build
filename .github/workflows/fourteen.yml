@@ -79,7 +79,7 @@ jobs:
         run: |
           python3 ci_build.py -t development # release
 
-      - name: Copy File to Scritps
+      - name: Copy File to Scripts
         working-directory: ./android_kernel_xiaomi_ginkgo
         run: |
           cp build_counter.txt ../scripts
