@@ -4,7 +4,6 @@ on:
   workflow_dispatch
 
 env:
-  ZIPNAME: MoeKernel-$(date '+%Y%m%d-%H%M').zip
   TOKEN_GITHUB: ${{ secrets.TOKEN_GITHUB }}
 
 jobs:
@@ -19,7 +18,7 @@ jobs:
         uses: whyakari/github-repo-action@v3.1
         with:
           depth: 1
-          branch: 'no-ksu'
+          branch: 'fourteen'
           owner: 'whyakari'
           repository: 'kernel_moe_pixelos'
           access-token: ${{ secrets.TOKEN_GITHUB }}
@@ -31,7 +30,7 @@ jobs:
           key: ${{ runner.os }}-tc
         id: tc-cache
 
-      - name: Github set Config Email and Name
+      - name: Github set Config
         working-directory: ./kernel_moe_pixelos
         run: |
           git config --global user.email "akariondev@gmail.com"
@@ -42,21 +41,25 @@ jobs:
          sudo apt-get update
          sudo apt-get -y --no-install-recommends install python3 python3-pip git make gcc bc bison flex libssl-dev ccache libelf-dev libncurses-dev bc binutils-dev ca-certificates clang cmake curl file flex git libelf-dev libssl-dev lld make ninja-build python3-dev texinfo u-boot-tools xz-utils zlib1g-dev
 
+      - name: Pip Install Packages
+        working-directory: ./kernel_moe_pixelos
+        run: |
+          pip install Pyrogram TgCrypto load_dotenv
+
+      - name: Permissions Set
+        working-directory: ./kernel_moe_pixelos
+        run: |
+          chmod +x build.sh ksu_update.sh
+
+      - name: Export Variables to .env
+        run: |
+         echo "CHAT_ID=${{ secrets.CHAT_ID }}" >> .env
+         echo "API_ID=${{ secrets.API_ID }}" >> .env
+         echo "API_HASH=${{ secrets.API_HASH }}" >> .env
+         echo "BOT_TOKEN=${{ secrets.BOT_TOKEN_PIXELOS }}" >> .env
+
       - name: Compile Kernel CI
         working-directory: ./kernel_moe_pixelos
         run: |
-          chmod +x build.sh
-          ./build.sh
-
-      - name: Artifact Path
-        working-directory: ./kernel_moe_pixelos
-        run: |
-          pwd
-          echo "artifactPath=/home/runner/work/kernel_build_actions/kernel_build_actions/kernel_moe_pixelos/**/*.zip" >> $GITHUB_ENV
-
-      - name: Upload Kernel
-        uses: actions/upload-artifact@v3
-        with:
-          name: artifact-kernel
-          path: ${{ env.artifactPath }}
-          if-no-files-found: error
+          python3 upload_bot.py -t dev # or release.
+          
