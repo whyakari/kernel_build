@@ -5,7 +5,7 @@
 #     Akari Azusagawa © 2023
 # ----------------------------- 
 
-date_="20240106" # updated clang version.
+date_="20240114" # updated clang version.
 version="18.0.0git-$date_-release"
 clang_gz="Clang-18.0.0git-$date_.tar.gz"
 url="https://github.com/ZyCromerZ/Clang/releases/download/$version/$clang_gz"
