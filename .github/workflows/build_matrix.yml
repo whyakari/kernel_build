@@ -19,7 +19,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Clone Repo Android Kernel
+      - name: Clone Repo Kernel
         uses: whyakari/github-repo-action@v3.1
         with:
           depth: 1
@@ -32,7 +32,7 @@ jobs:
         uses: whyakari/github-repo-action@v3.1
         with:
           owner: 'whyakari'
-          repository: 'kernel_build_actions'
+          repository: 'kernel_build'
           access-token: ${{ secrets.TOKEN_GITHUB }}
 
       - name: Clone Repo Scripts
@@ -57,7 +57,7 @@ jobs:
           chmod +x ksu_update.sh
           cp ksu_update.sh build_counter.txt ci_build.py ../android_kernel_xiaomi_ginkgo
 
-      - name: Github set Config Email and Name
+      - name: Github set Config
         working-directory: ./android_kernel_xiaomi_ginkgo
         run: |
           git config --global user.email "akariondev@gmail.com"
@@ -78,7 +78,7 @@ jobs:
         run: |
           python3 ci_build.py -t development # release
 
-      - name: Move CI Build Count
+      - name: Move CI Build
         working-directory: ./android_kernel_xiaomi_ginkgo
         run: |
           cp build_counter.txt ../scripts
