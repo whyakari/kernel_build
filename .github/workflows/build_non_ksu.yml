@@ -14,7 +14,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Clone Repo Android Kernel 
+      - name: Clone Repo Kernel 
         uses: whyakari/github-repo-action@v3.1
         with:
           depth: 1
@@ -23,18 +23,18 @@ jobs:
           repository: 'android_kernel_xiaomi_ginkgo'
           access-token: ${{ secrets.TOKEN_GITHUB }}
 
-      - name: Clone Repo kernel_build_actions
+      - name: Clone Repo Kernel_Build_Actions
         uses: whyakari/github-repo-action@v3.1
         with:
           owner: 'whyakari'
           repository: 'kernel_build_actions'
           access-token: ${{ secrets.TOKEN_GITHUB }}
 
-      - name: Move Script Download Clang-18.0.0
+      - name: Move Script Clang.sh
         working-directory: kernel_build_actions
         run: |
-          chmod +x download_clang18.0.0.sh
-          cp download_clang18.0.0.sh ../android_kernel_xiaomi_ginkgo
+          chmod +x clang.sh
+          cp clang.sh ../android_kernel_xiaomi_ginkgo
 
       - name: Clone Repo Scripts
         uses: whyakari/github-repo-action@v3.1
@@ -50,7 +50,7 @@ jobs:
         run: |
           cp build_counter.txt ci_build.py ../android_kernel_xiaomi_ginkgo
 
-      - name: Github set Config Email and Name
+      - name: Github set Config
         working-directory: ./android_kernel_xiaomi_ginkgo
         run: |
           git config --global user.email "akariondev@gmail.com"
@@ -69,10 +69,10 @@ jobs:
       - name: Compile Kernel CI
         working-directory: ./android_kernel_xiaomi_ginkgo
         run: |
-          # ./download_clang18.0.0.sh
+          # ./clang.sh
           python3 ci_build.py -t development # release
 
-      - name: Move CI Build Count
+      - name: Move CI Build
         working-directory: ./android_kernel_xiaomi_ginkgo
         run: |
           cp build_counter.txt ../scripts
