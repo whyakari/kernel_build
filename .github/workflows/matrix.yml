@@ -28,7 +28,7 @@ jobs:
           repository: 'android_kernel_xiaomi_ginkgo'
           access-token: ${{ secrets.TOKEN_GITHUB }}
 
-      - name: Clone Repo kernel_build_actions
+      - name: Clone Repo Kernel Build
         uses: whyakari/github-repo-action@v3.1
         with:
           owner: 'whyakari'
