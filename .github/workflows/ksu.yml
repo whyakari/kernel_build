@@ -37,7 +37,7 @@ jobs:
           key: ${{ runner.os }}-tc
         id: tc-cache 
 
-      - name: Move Script Download Clang
+      - name: Move Script Clang
         working-directory: kernel_build
         run: |
           chmod +x clang.sh
