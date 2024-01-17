@@ -11,20 +11,20 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Clone Repo kernel_build_actions
+    - name: Clone Repo Kernel_Build_Actions
       uses: whyakari/github-repo-action@v3.1
       with:
         owner: 'whyakari'
         repository: 'kernel_build_actions'
         access-token: ${{ secrets.TOKEN_GITHUB }}
 
-    - name: Download Clang18.0.0
+    - name: Download Clang
       working-directory: ./kernel_build_actions
       run: |
-        chmod +x download_clang18.0.0.sh
-        ./download_clang18.0.0.sh
+        chmod +x clang.sh
+        ./clang.sh # download clang.
 
-    - name: Setup GCC / GCC32 / Clang18
+    - name: Setup GCC / GCC32 / Clang
       run: |
         TC_DIR="$HOME/tc/clang-18.0.0"
         GCC_64_DIR="$HOME/tc/aarch64-linux-android-14.0"
