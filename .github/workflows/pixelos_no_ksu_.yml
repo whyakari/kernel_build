@@ -51,7 +51,7 @@ jobs:
         run: |
           chmod +x build.sh ksu_update.sh
 
-      - name: Export Variables to .env
+      - name: Export Variables
         run: |
          echo "CHAT_ID=${{ secrets.CHAT_ID }}" >> .env
          echo "API_ID=${{ secrets.API_ID }}" >> .env
