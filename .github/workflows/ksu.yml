@@ -1,4 +1,4 @@
-name: Build Kernel Fourteen (KSU)
+name: Build Kernel (KSU)
 
 on:
   workflow_dispatch
