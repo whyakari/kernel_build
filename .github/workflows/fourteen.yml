@@ -40,8 +40,8 @@ jobs:
       - name: Move Script Download Clang
         working-directory: kernel_build
         run: |
-          chmod +x download_clang18.0.0.sh
-          cp download_clang18.0.0.sh ../android_kernel_xiaomi_ginkgo
+          chmod +x clang.sh
+          cp clang.sh ../android_kernel_xiaomi_ginkgo
 
       - name: Clone Repo Scripts
         uses: whyakari/github-repo-action@v3.1
