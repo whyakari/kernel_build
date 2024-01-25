@@ -5,13 +5,13 @@
 #     Akari Azusagawa © 2023
 # ----------------------------- 
 
-date_="20240122" # updated clang version.
-version="18.0.0git-$date_-release"
-clang_gz="Clang-18.0.0git-$date_.tar.gz"
+date_="20240125" # updated clang version.
+version="19.0.0git-$date_-release"
+clang_gz="Clang-19.0.0git-$date_.tar.gz"
 url="https://github.com/ZyCromerZ/Clang/releases/download/$version/$clang_gz"
 
 output_file="$clang_gz"
-destination_dir="$HOME/tc/clang-18.0.0"
+destination_dir="$HOME/tc/clang-19.0.0"
 
 if ! command -v curl &>/dev/null; then
   echo "The command 'curl' not installed. Please, install for continue."
