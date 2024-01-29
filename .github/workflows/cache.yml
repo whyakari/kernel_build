@@ -18,7 +18,7 @@ jobs:
         repository: 'kernel_build_actions'
         access-token: ${{ secrets.TOKEN_GITHUB }}
 
-   - name: Check for Clang Update
+    - name: Check for Clang Update
       id: check-update
       run: |
         python3 update.py
