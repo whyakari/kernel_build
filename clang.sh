@@ -5,7 +5,7 @@
 #     Akari Azusagawa © 2023
 # ----------------------------- 
 
-date_="20240125" # updated clang version.
+date_=$(python3 update.py) # updated clang version.
 version="19.0.0git-$date_-release"
 clang_gz="Clang-19.0.0git-$date_.tar.gz"
 url="https://github.com/ZyCromerZ/Clang/releases/download/$version/$clang_gz"
