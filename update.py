@@ -27,12 +27,8 @@ local_date = read_date_from_file()
 
 if latest_release_tag != local_date:
     print("New release detected. Updating date and committing.")
-    
-    # Update the date in the file
     write_date_to_file(latest_release_tag)
 
-    # Perform the necessary actions for updating and committing
-    # (you can add your commit logic here)
     subprocess.run(["git", "add", date_file_path])
     subprocess.run(["git", "commit", "-m", f"Update clang date to {latest_release_tag}"])
     subprocess.run(["git", "push"])
