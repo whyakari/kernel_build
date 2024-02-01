@@ -38,7 +38,6 @@ jobs:
         ./clang.sh # download clang.
 
     - name: Setup GCC / GCC32 / Clang
-      working-directory: ./kernel_build
       run: |
         TC_DIR="$HOME/tc/clang-19.0.0"
         GCC_64_DIR="$HOME/tc/aarch64-linux-android-14.0"
