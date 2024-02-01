@@ -19,15 +19,18 @@ jobs:
         access-token: ${{ secrets.TOKEN_GITHUB }}
 
     - name: Export Variables
+      working-directory: ./kernel_build
       run: |
         echo "TOKEN_GITHUB=${{ secrets.TOKEN_GITHUB }}" >> .env
 
     - name: Install Depends
+      working-directory: ./kernel_build
       run: |
         pip install load_dotenv
 
     - name: Check for Clang Update
       id: check-update
+      working-directory: ./kernel_build
       run: |
         python3 update.py
       continue-on-error: true
