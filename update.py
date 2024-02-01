@@ -29,6 +29,8 @@ if latest_release_tag != local_date:
     print("New release detected. Updating date and committing.")
     write_date_to_file(latest_release_tag)
 
+    subprocess.run(["git", "config", "--global", "user.email", "barryofc11@gmail.com"])
+    subprocess.run(["git", "config", "--global", "user.name", "Akari"])
     subprocess.run(["git", "add", date_file_path])
     subprocess.run(["git", "commit", "-m", f"Update clang date to {latest_release_tag}"])
     subprocess.run(["git", "push"])
