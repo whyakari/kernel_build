@@ -21,6 +21,7 @@ jobs:
     - name: Check for Clang Update
       id: check-update
       run: |
+        pip install load_dotenv
         python3 update.py
       continue-on-error: true
 
