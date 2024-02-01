@@ -18,7 +18,7 @@ jobs:
         repository: 'kernel_build'
         access-token: ${{ secrets.TOKEN_GITHUB }}
 
-    - name: Export Variables
+    - name: Export Variable TOKEN_GITHUB
       working-directory: ./kernel_build
       run: |
         echo "TOKEN_GITHUB=${{ secrets.TOKEN_GITHUB }}" >> .env
