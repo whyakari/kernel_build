@@ -18,6 +18,10 @@ jobs:
         repository: 'kernel_build_actions'
         access-token: ${{ secrets.TOKEN_GITHUB }}
 
+    - name: Export Variables
+      run: |
+        echo "TOKEN_GITHUB=${{ secrets.TOKEN_GITHUB }}" >> .env
+         
     - name: Check for Clang Update
       id: check-update
       run: |
