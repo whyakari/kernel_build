@@ -1,10 +1,17 @@
 import os
 import requests
 import subprocess
+from dotenv import load_dotenv
 
 repo_url = "https://github.com/ZyCromerZ/Clang"
 release_url = f"{repo_url}/releases/latest"
 date_file_path = "date_.txt"
+
+load_dotenv()
+
+TOKEN_GITHUB = os.getenv('TOKEN_GITHUB', '')
+USER = "whyakari"
+REPO = "kernel_build"
 
 def get_tag_release():
     response = requests.get(release_url)
@@ -28,7 +35,8 @@ local_date = read_date_from_file()
 if latest_release_tag != local_date:
     print("New release detected. Updating date and committing.")
     write_date_to_file(latest_release_tag)
-
+    url_remoto = f'https://{USER}:{TOKEN_GITHUB}@github.com/{USER}/{REPO}.git'
+    subprocess.run(['git', 'remote', 'set-url', 'origin', url_remoto])
     subprocess.run(["git", "config", "--global", "user.email", "barryofc11@gmail.com"])
     subprocess.run(["git", "config", "--global", "user.name", "Akari"])
     subprocess.run(["git", "add", date_file_path])
@@ -36,4 +44,3 @@ if latest_release_tag != local_date:
     subprocess.run(["git", "push"])
 else:
     print("No new release detected.")
-
