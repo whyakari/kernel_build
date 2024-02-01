@@ -19,10 +19,12 @@ jobs:
         access-token: ${{ secrets.TOKEN_GITHUB }}
 
     - name: Export Variables
+      working-directory: ./kernel_build
       run: |
         echo "TOKEN_GITHUB=${{ secrets.TOKEN_GITHUB }}" >> .env
          
     - name: Check for Clang Update
+      working-directory: ./kernel_build
       id: check-update
       run: |
         pip install load_dotenv
@@ -31,12 +33,13 @@ jobs:
 
     - name: Download Clang
       if: steps.check-update.outcome == 'success'
-      working-directory: ./kernel_build_actions
+      working-directory: ./kernel_build
       run: |
         chmod +x clang.sh
         ./clang.sh # download clang.
 
     - name: Setup GCC / GCC32 / Clang
+      working-directory: ./kernel_build
       run: |
         TC_DIR="$HOME/tc/clang-19.0.0"
         GCC_64_DIR="$HOME/tc/aarch64-linux-android-14.0"
