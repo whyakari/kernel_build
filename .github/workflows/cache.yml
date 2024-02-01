@@ -23,7 +23,6 @@ jobs:
         echo "TOKEN_GITHUB=${{ secrets.TOKEN_GITHUB }}" >> .env
          
     - name: Check for Clang Update
-      working-directory: ./kernel_build
       id: check-update
       run: |
         pip install load_dotenv
