@@ -15,17 +15,20 @@ jobs:
       uses: whyakari/github-repo-action@v3.1
       with:
         owner: 'whyakari'
-        repository: 'kernel_build_actions'
+        repository: 'kernel_build'
         access-token: ${{ secrets.TOKEN_GITHUB }}
 
     - name: Export Variables
       run: |
         echo "TOKEN_GITHUB=${{ secrets.TOKEN_GITHUB }}" >> .env
-         
+
+    - name: Install Depends
+      run: |
+        pip install load_dotenv
+
     - name: Check for Clang Update
       id: check-update
       run: |
-        pip install load_dotenv
         python3 update.py
       continue-on-error: true
 
