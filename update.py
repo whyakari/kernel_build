@@ -7,6 +7,7 @@ repo_url = "https://github.com/ZyCromerZ/Clang"
 release_url = f"{repo_url}/releases/latest"
 date_file_path = "date_.txt"
 
+# load the environment variables.
 load_dotenv()
 
 TOKEN_GITHUB = os.getenv('TOKEN_GITHUB', '')
@@ -35,10 +36,14 @@ local_date = read_date_from_file()
 if latest_release_tag != local_date:
     print("New release detected. Updating date and committing.")
     write_date_to_file(latest_release_tag)
+
+    # set url-remote and configure user.name and user.email.
     url_remoto = f'https://{USER}:{TOKEN_GITHUB}@github.com/{USER}/{REPO}.git'
-    subprocess.run(['git', 'remote', 'set-url', 'origin', url_remoto])
+    subprocess.run(["git", "remote", "set-url", "origin", url_remoto])
     subprocess.run(["git", "config", "--global", "user.email", "barryofc11@gmail.com"])
     subprocess.run(["git", "config", "--global", "user.name", "Akari"])
+
+    # commit and push.
     subprocess.run(["git", "add", date_file_path])
     subprocess.run(["git", "commit", "-m", f"Update clang date to {latest_release_tag}"])
     subprocess.run(["git", "push"])
