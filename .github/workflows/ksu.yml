@@ -7,7 +7,7 @@ env:
   TOKEN_GITHUB: ${{ secrets.TOKEN_GITHUB }}
 
 jobs:
-  build_ci:
+  ci:
     runs-on: ubuntu-latest
 
     steps:
