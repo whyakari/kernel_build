@@ -19,7 +19,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Clone Repo Kernel
+      - name: Clone Repo Android Kernel
         uses: whyakari/github-repo-action@v3.1
         with:
           depth: 1
@@ -28,7 +28,7 @@ jobs:
           repository: 'android_kernel_xiaomi_ginkgo'
           access-token: ${{ secrets.TOKEN_GITHUB }}
 
-      - name: Clone Repo Kernel Build
+      - name: Clone Repo kernel_build
         uses: whyakari/github-repo-action@v3.1
         with:
           owner: 'whyakari'
@@ -39,7 +39,7 @@ jobs:
         uses: whyakari/github-repo-action@v3.1
         with:
           depth: 1
-          branch: ${{ matrix.type == 'KSU' && 'fourteen' || matrix.type == 'Dynamic' && 'dynamic' || matrix.type == 'NO-KSU' && 'non-ksu' }}
+          branch: ${{ matrix.type == 'KSU' && 'main' || matrix.type == 'Dynamic' && 'dynamic' || matrix.type == 'NO-KSU' && 'non-ksu' }}
           owner: 'whyakari'
           repository: 'scripts'
           access-token: ${{ secrets.TOKEN_GITHUB }}
@@ -88,4 +88,4 @@ jobs:
         run: |
           git add build_counter.txt
           git commit -m "update build counter"
-          git push origin ${{ matrix.type == 'KSU' && 'fourteen' || matrix.type == 'NO-KSU' && 'non-ksu' }} --force
+          git push origin ${{ matrix.type == 'KSU' && 'main' || matrix.type == 'Dynamic' && 'dynamic' || matrix.type == 'NO-KSU' && 'non-ksu' }} --force
