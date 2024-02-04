@@ -13,7 +13,7 @@ jobs:
 
     strategy:
       matrix:
-        build_type: ['KSU', 'NO-KSU']
+        type: ['KSU', 'NO-KSU', 'Dynamic-Partition']
 
     steps:
       - name: Checkout Repository
@@ -23,7 +23,7 @@ jobs:
         uses: whyakari/github-repo-action@v3.1
         with:
           depth: 1
-          branch: ${{ matrix.build_type == 'KSU' && 'fourteen' || matrix.build_type == 'NO-KSU' && 'non-ksu' }}
+          branch: ${{ matrix.type == 'KSU' && 'fourteen' || matrix.type == 'Dynamic-Partition' && 'fourteen' || matrix.type == 'NO-KSU' && 'non-ksu' }}
           owner: 'whyakari'
           repository: 'android_kernel_xiaomi_ginkgo'
           access-token: ${{ secrets.TOKEN_GITHUB }}
@@ -39,7 +39,7 @@ jobs:
         uses: whyakari/github-repo-action@v3.1
         with:
           depth: 1
-          branch: ${{ matrix.build_type == 'KSU' && 'main' || matrix.build_type == 'NO-KSU' && 'non-ksu' }}
+          branch: ${{ matrix.build_type == 'KSU' && 'main' || matrix.type == 'Dynamic-Partition' && 'fourteen' || matrix.build_type == 'NO-KSU' && 'non-ksu' }}
           owner: 'whyakari'
           repository: 'scripts'
           access-token: ${{ secrets.TOKEN_GITHUB }}
@@ -88,4 +88,4 @@ jobs:
         run: |
           git add build_counter.txt
           git commit -m "update build counter"
-          git push origin ${{ matrix.build_type == 'KSU' && 'main' || matrix.build_type == 'NO-KSU' && 'non-ksu' }} --force
+          git push origin ${{ matrix.type == 'KSU' && 'fourteen' || matrix.type == 'Dynamic-Partition' && 'fourteen' || matrix.type == 'NO-KSU' && 'non-ksu' }} --force
