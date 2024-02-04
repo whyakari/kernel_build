@@ -39,7 +39,7 @@ jobs:
         uses: whyakari/github-repo-action@v3.1
         with:
           depth: 1
-          branch: ${{ matrix.build_type == 'KSU' && 'main' || matrix.type == 'Dynamic-Partition' && 'fourteen' || matrix.build_type == 'NO-KSU' && 'non-ksu' }}
+          branch: ${{ matrix.type == 'KSU' && 'main' || matrix.type == 'Dynamic-Partition' && 'fourteen' || matrix.type == 'NO-KSU' && 'non-ksu' }}
           owner: 'whyakari'
           repository: 'scripts'
           access-token: ${{ secrets.TOKEN_GITHUB }}
