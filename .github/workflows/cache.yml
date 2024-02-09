@@ -59,12 +59,23 @@ jobs:
             git clone --depth=1 -b gcc-master https://github.com/whyakari/gcc-arm ${GCC_32_DIR}
         fi
 
+    - name: Remove existing cache
+      uses: actions/cache@v2
+      with:
+        path: /home/runner/tc
+        key: ${{ runner.os }}-tc
+        restore-keys: |
+          ${{ runner.os }}-tc
+      if: steps.check-update.outcome == 'success'
+
     - name: Cache Create
       id: tc-cache
       uses: actions/cache/save@v3
       with:
         path: /home/runner/tc
         key: ${{ runner.os }}-tc
+        restore-keys: |
+          ${{ runner.os }}-tc
 
     - name: Display cached directories
       run: |
