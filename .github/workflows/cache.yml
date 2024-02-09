@@ -60,6 +60,7 @@ jobs:
         fi
 
     - name: Remove existing cache
+      id: remove-cache
       uses: actions/cache@v2
       with:
         path: /home/runner/tc
@@ -70,12 +71,11 @@ jobs:
 
     - name: Cache Create
       id: tc-cache
+      if: steps.remove-cache.outcome != 'failure'
       uses: actions/cache/save@v3
       with:
         path: /home/runner/tc
         key: ${{ runner.os }}-tc
-        restore-keys: |
-          ${{ runner.os }}-tc
 
     - name: Display cached directories
       run: |
