@@ -37,6 +37,13 @@ jobs:
         python3 update.py
       continue-on-error: true
 
+    - name: Remove existing cache
+      run: |
+        if [ -d "/home/runner/tc" ]; then
+            echo "Removing existing cache..."
+            rm -rf /home/runner/tc
+        fi
+
     - name: Download Clang
       if: steps.check-update.outcome == 'success'
       run: |
@@ -57,13 +64,6 @@ jobs:
         if ! [ -d "${GCC_32_DIR}" ]; then
             echo "gcc_32 not found! Cloning to ${GCC_32_DIR}..."
             git clone --depth=1 -b gcc-master https://github.com/whyakari/gcc-arm ${GCC_32_DIR}
-        fi
-
-    - name: Remove existing cache
-      run: |
-        if [ -d "/home/runner/tc" ]; then
-            echo "Removing existing cache..."
-            rm -rf /home/runner/tc
         fi
 
     - name: Cache Create
