@@ -37,13 +37,6 @@ jobs:
         python3 update.py
       continue-on-error: true
 
-    - name: Remove existing cache
-      run: |
-        if [ -d "/home/runner/tc" ]; then
-            echo "Removing existing cache..."
-            rm -rf /home/runner/tc
-        fi
-
     - name: Download Clang
       if: steps.check-update.outcome == 'success'
       run: |
