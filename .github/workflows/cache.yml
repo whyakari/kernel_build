@@ -13,7 +13,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Clone Repo Kernel_Build_Actions
+    - name: Clone Repo Kernel_Build
       uses: whyakari/github-repo-action@v3.1
       with:
         owner: 'whyakari'
